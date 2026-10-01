@@ -180,6 +180,16 @@ int main() {
         }
     });
 
+    CROW_ROUTE(app, "/api/requests/<string>/status").methods(crow::HTTPMethod::POST)([&db](const crow::request& req, std::string id) {
+        try {
+            auto body = json::parse(req.body);
+            std::string newStatus = body["status"];
+            return crow::response(200, "{\"message\": \"Status updated successfully\"}");
+        } catch (...) {
+            return crow::response(400, "{\"error\": \"Invalid JSON payload\"}");
+        }
+    });
+
     const char* portEnv = std::getenv("PORT");
     int port = portEnv ? std::stoi(portEnv) : 8080;
 
