@@ -11,9 +11,10 @@ WORKDIR /app
 
 COPY . .
 
-RUN cmake -S Backend -B Backend/build -DCMAKE_BUILD_TYPE=Release && \
+RUN rm -rf Backend/build && \
+    cmake -S Backend -B Backend/build -DCMAKE_BUILD_TYPE=Release && \
     cmake --build Backend/build --config Release
-
+    
 EXPOSE 10000
 
 CMD ["./Backend/build/ecotrade_server"]
