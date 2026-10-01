@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include "crow.h"
 #include "crow/middlewares/cors.h"
 #include "Database.hpp"
@@ -14,7 +15,7 @@ int main() {
         .methods(crow::HTTPMethod::GET, crow::HTTPMethod::POST, crow::HTTPMethod::DELETE, crow::HTTPMethod::OPTIONS)
         .origin("*");
 
-    Database db("../../Database/database.db");
+    Database db("Database/database.db");
 
     // --- AUTHENTICATION ROUTES ---
     CROW_ROUTE(app, "/api/auth/register").methods(crow::HTTPMethod::POST)([&db](const crow::request& req) {
@@ -128,10 +129,13 @@ int main() {
         }
     });
 
-    std::cout << "======================================================" << std::endl;
-    std::cout << " C++ Server Running on: http://localhost:8080" << std::endl;
-    std::cout << " EcoTrade Tacloban Reusable Materials REST API" << std::endl;
-    std::cout << "======================================================" << std::endl;
+    const char* portEnv = std::getenv("PORT");
+    int port = portEnv ? std::stoi(portEnv) : 8080;
 
-    app.port(8080).multithreaded().run();
+    std::cout << "==============================================" << std::endl;
+    std::cout << "EcoTrade Tacloban Reusable Materials REST API" << std::endl;
+    std::cout << "Server running on port: " << port << std::endl;
+    std::cout << "==============================================" << std::endl;
+
+    app.port(port).multithreaded().run();
 }
