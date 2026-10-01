@@ -418,7 +418,7 @@ function renderUserDashboard() {
     userNameEl.innerText = "Guest Visitor";
     userDetailsEl.innerText = "Please log in using the button above to manage your personal material listings and pickup requests.";
     myTableTbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color: var(--text-muted); padding: 20px;">Log in to view your posted materials</td></tr>`;
-    requestsTbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color: var(--text-muted); padding: 20px;">Log in to view trade offers</td></tr>`;
+    requestsTbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color: var(--text-muted); padding: 20px;">Log in to view trade offers</td></tr>`;
     if (reqBadge) reqBadge.style.display = "none";
     return;
   }
@@ -452,7 +452,7 @@ function renderUserDashboard() {
   }
 
   if (appState.requests.length === 0) {
-    requestsTbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color: var(--text-muted); padding: 20px;">No trade inquiries or pickup requests received yet.</td></tr>`;
+    requestsTbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color: var(--text-muted); padding: 20px;">No trade inquiries or pickup requests received yet.</td></tr>`;
   } else {
     requestsTbody.innerHTML = appState.requests.map(req => `
       <tr>
@@ -460,11 +460,11 @@ function renderUserDashboard() {
         <td>${req.requesterName}<br><small style="color:var(--text-muted);">${req.requesterContact}</small></td>
         <td style="max-width: 250px;">${req.message}</td>
         <td>${req.dateSent}</td>
-        <td><span class="badge badge-trade">${req.status}</span></td>
+        <td><span class="badge ${req.status === 'Approved' ? 'badge-sale' : 'badge-trade'}">${req.status}</span></td>
         <td>
           ${req.status === 'Pending' ? `
             <button class="btn btn-secondary btn-sm" onclick="updateRequestStatus('${req.id}', 'Approved')" style="background:#10b981; color:#fff;">Approve</button>
-          ` : ''}
+          ` : `<span style="color: var(--text-muted); font-size: 0.85rem;"><i class="fa-solid fa-check" style="color:#10b981;"></i> Completed</span>`}
         </td>
       </tr>
     `).join("");
@@ -480,8 +480,15 @@ async function updateRequestStatus(requestId, newStatus) {
     });
 
     if (res.ok) {
+      const req = appState.requests.find(r => r.id === requestId);
+      if (req) {
+        req.status = newStatus;
+      }
+
       await fetchRequests();
       renderUserDashboard();
+
+      alert(`Request has been marked as ${newStatus}! Notification sent to ${req ? req.requesterName : 'the user'}.`);
     } else {
       alert("Failed to update request status.");
     }
