@@ -37,6 +37,37 @@ int main() {
         return crow::response(200, page);
     });
 
+    // --- STATIC ASSET ROUTES ---
+    CROW_ROUTE(app, "/styles.css")([](){
+        std::ifstream file("Frontend/styles.css");
+        if (!file.is_open()) return crow::response(404, "File not found");
+        std::stringstream buffer;
+        buffer << file.rdbuf();
+        auto res = crow::response(buffer.str());
+        res.set_header("Content-Type", "text/css");
+        return res;
+    });
+
+    CROW_ROUTE(app, "/app.js")([](){
+        std::ifstream file("Frontend/app.js");
+        if (!file.is_open()) return crow::response(404, "File not found");
+        std::stringstream buffer;
+        buffer << file.rdbuf();
+        auto res = crow::response(buffer.str());
+        res.set_header("Content-Type", "application/javascript");
+        return res;
+    });
+
+    CROW_ROUTE(app, "/nav.png")([](){
+        std::ifstream file("Frontend/nav.png", std::ios::binary);
+        if (!file.is_open()) return crow::response(404, "File not found");
+        std::stringstream buffer;
+        buffer << file.rdbuf();
+        auto res = crow::response(buffer.str());
+        res.set_header("Content-Type", "image/png");
+        return res;
+    });
+
     // --- AUTHENTICATION ROUTES ---
     CROW_ROUTE(app, "/api/auth/register").methods(crow::HTTPMethod::POST)([&db](const crow::request& req) {
         try {
