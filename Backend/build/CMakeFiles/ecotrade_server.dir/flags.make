@@ -6,5 +6,5 @@ CXX_DEFINES = -DBOOST_DATE_TIME_DYN_LINK -DBOOST_DATE_TIME_NO_LIB -DBOOST_SYSTEM
 
 CXX_INCLUDES = -I"/home/chrlmgnadona/Project(Plat.Tech2)/Backend/build/_deps/crow-src/include" -I"/home/chrlmgnadona/Project(Plat.Tech2)/Backend/build/_deps/json-src/include"
 
-CXX_FLAGS = -std=gnu++17
+CXX_FLAGS = -O3 -DNDEBUG -std=gnu++17
 
