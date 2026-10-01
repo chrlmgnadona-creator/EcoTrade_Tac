@@ -8,6 +8,7 @@ RUN apt-get update && \
     ca-certificates \
     libsqlite3-dev \
     libssl-dev \
+    libboost-all-dev \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
