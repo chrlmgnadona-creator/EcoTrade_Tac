@@ -27,10 +27,10 @@ find_package(OpenSSL REQUIRED)
 
 add_executable(ecotrade_server main.cpp)
 
-target_link_libraries(ecotrade_server PRIVATE 
-    Crow::Crow 
-    nlohmann_json::nlohmann_json 
-    SQLite::SQLite3 
-    OpenSSL::SSL 
+target_link_libraries(ecotrade_server PRIVATE
+    Crow::Crow
+    nlohmann_json::nlohmann_json
+    SQLite::SQLite3
+    OpenSSL::SSL
     OpenSSL::Crypto
 )
