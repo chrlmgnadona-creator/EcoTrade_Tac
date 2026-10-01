@@ -4,6 +4,19 @@
 #include "Database.hpp"
 #include "HashUtils.hpp"
 #include <chrono>
+#include <fstream>
+#include <sstream>
+
+// Helper function to load frontend files safely
+std::string readHtmlFile(const std::string& filepath) {
+    std::ifstream file(filepath);
+    if (!file.is_open()) {
+        return "<!DOCTYPE html><html><body><h1>404 - Frontend File Not Found</h1><p>Make sure Frontend/index.html exists relative to the server execution path.</p></body></html>";
+    }
+    std::stringstream buffer;
+    buffer << file.rdbuf();
+    return buffer.str();
+}
 
 int main() {
     crow::App<crow::CORSHandler> app;
@@ -16,6 +29,13 @@ int main() {
         .origin("*");
 
     Database db("Database/database.db");
+
+    // --- FRONTEND ROOT ROUTE ---
+    CROW_ROUTE(app, "/")([](){
+        // Serves your index.html file when visiting the base URL
+        auto page = readHtmlFile("Frontend/index.html");
+        return crow::response(200, page);
+    });
 
     // --- AUTHENTICATION ROUTES ---
     CROW_ROUTE(app, "/api/auth/register").methods(crow::HTTPMethod::POST)([&db](const crow::request& req) {
