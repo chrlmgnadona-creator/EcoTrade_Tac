@@ -2,7 +2,7 @@
    C++ REST API ENGINE & APP STATE MANAGEMENT
    ========================================================= */
 
-const API_URL = window.location.origin + "/api";
+const API_BASE = window.location.origin + "/api";
 
 // App State Management
 let appState = {
