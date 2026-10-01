@@ -461,8 +461,33 @@ function renderUserDashboard() {
         <td style="max-width: 250px;">${req.message}</td>
         <td>${req.dateSent}</td>
         <td><span class="badge badge-trade">${req.status}</span></td>
+        <td>
+          ${req.status === 'Pending' ? `
+            <button class="btn btn-secondary btn-sm" onclick="updateRequestStatus('${req.id}', 'Approved')" style="background:#10b981; color:#fff;">Approve</button>
+          ` : ''}
+        </td>
       </tr>
     `).join("");
+  }
+}
+
+async function updateRequestStatus(requestId, newStatus) {
+  try {
+    const res = await fetch(`${API_BASE}/requests/${requestId}/status`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status: newStatus })
+    });
+
+    if (res.ok) {
+      await fetchRequests();
+      renderUserDashboard();
+    } else {
+      alert("Failed to update request status.");
+    }
+  } catch (err) {
+    console.error("Status update error:", err);
+    alert("Error communicating with C++ server.");
   }
 }
 
