@@ -1,1 +1,0 @@
-cd Backend/build && make -j4 && ./ecotrade_server
