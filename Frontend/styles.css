@@ -789,21 +789,129 @@ html[data-theme="contrast"] .btn-accent {
   gap: 8px;
 }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
+/* =========================================================
+   COMPREHENSIVE RESPONSIVE MEDIA QUERIES
+   ========================================================= */
+
+/* Medium Screens / Tablets (Max width: 992px) */
+@media screen and (max-width: 992px) {
   .navbar-inner {
     flex-direction: column;
-    gap: 12px;
+    gap: 15px;
+    padding: 10px 0;
   }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .filter-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* Small Screens / Mobile Phones (Max width: 768px) */
+@media screen and (max-width: 768px) {
+  /* Header & Top Bar */
+  .lgu-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 5px;
+    font-size: 0.75rem;
+  }
+
+  /* Navbar Adjustments */
+  .logo-container h1 {
+    font-size: 1.2rem;
+  }
+  
+  .logo-container p {
+    font-size: 0.75rem;
+  }
+
   .nav-links {
     width: 100%;
     justify-content: center;
-    flex-wrap: wrap;
   }
+
+  .nav-btn {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+
+  /* Hero Banner */
+  .hero-banner {
+    padding: 25px 15px;
+    text-align: center;
+  }
+
   .hero-banner h2 {
     font-size: 1.4rem;
   }
+
+  .hero-banner p {
+    font-size: 0.85rem;
+  }
+
   .search-bar-wrap {
     flex-direction: column;
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+    gap: 10px;
+  }
+
+  .search-input-group {
+    background: var(--card-bg);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .search-bar-wrap .btn {
+    width: 100%;
+    padding: 12px !important;
+  }
+
+  /* Stack Filters and Stats to 1 Column */
+  .filter-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Modals */
+  .modal-box {
+    width: 95% !important;
+    margin: 10px;
+    padding: 15px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  #createModal .modal-box form > div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Extra Small Mobile Devices (Max width: 480px) */
+@media screen and (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  .materials-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .navbar {
+    padding: 0 10px;
   }
 }
