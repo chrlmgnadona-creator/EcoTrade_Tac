@@ -462,10 +462,6 @@ function renderUserDashboard() {
         <td>${req.dateSent}</td>
         <td><span class="badge ${req.status === 'Approved' ? 'badge-sale' : 'badge-trade'}">${req.status}</span></td>
         <td>
-          ${req.status === 'Pending' ? `
-            <button class="btn btn-secondary btn-sm" onclick="updateRequestStatus('${req.id}', 'Approved')" style="background:#10b981; color:#fff;">Approve</button>
-          ` : `<span style="color: var(--text-muted); font-size: 0.85rem;"><i class="fa-solid fa-check" style="color:#10b981;"></i> Completed</span>`}
-        </td>
       </tr>
     `).join("");
   }
