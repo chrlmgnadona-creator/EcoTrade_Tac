@@ -451,7 +451,7 @@ function renderUserDashboard() {
   }
 
   if (appState.requests.length === 0) {
-    requestsTbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color: var(--text-muted); padding: 20px;">No trade inquiries or pickup requests received yet.</td></tr>`;
+    requestsTbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color: var(--text-muted); padding: 20px;">No trade inquiries or pickup requests received yet.</td></tr>`;
   } else {
     requestsTbody.innerHTML = appState.requests.map(req => `
       <tr>
