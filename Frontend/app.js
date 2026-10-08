@@ -382,7 +382,7 @@ async function handleCreateItem(e) {
     });
 
     if (res.ok) {
-      alert("Your material has been saved to the C++ SQLite database!");
+      alert("Your material has been successfully listed! Thank you for contributing to a greener Tacloban.");
       closeModal("createModal");
       document.getElementById("create-item-form").reset();
       uploadedImageBase64 = null;
