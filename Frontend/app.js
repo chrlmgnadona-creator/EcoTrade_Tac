@@ -494,7 +494,7 @@ async function updateRequestStatus(requestId, newStatus) {
 }
 
 async function deleteListing(id) {
-  if (confirm("Are you sure you want to remove this reusable material listing?")) {
+  if (confirm("Are you sure you want to remove this reusable material listing? This action cannot be undone.")) {
     try {
       const res = await fetch(`${API_BASE}/materials/${id}`, {
         method: "DELETE"
