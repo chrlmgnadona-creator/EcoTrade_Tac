@@ -566,8 +566,8 @@ function toggleAuthMode() {
     btn.innerText = "Create Profile";
     text.innerText = "Already registered?";
     link.innerText = "Log In Here";
-    groupName.style.display = "block";
-    groupBrgy.style.display = "block";
+    groupName.style.display = "flex";
+    groupBrgy.style.display = "flex";
   } else {
     title.innerText = "Citizen Login";
     btn.innerText = "Log In";
