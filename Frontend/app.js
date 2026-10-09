@@ -437,6 +437,7 @@ function renderUserDashboard() {
         <td>${item.category}</td>
         <td>${item.type === 'FOR_SALE' ? '₱' + item.price : item.type}</td>
         <td><span class="badge badge-sale">Active</span></td>
+        <td>
           <button class="btn btn-secondary btn-sm" onclick="deleteListing('${item.id}')" style="background:#ef4444; color:#fff;">
             <i class="fa-solid fa-trash"></i> Delete
           </button>
